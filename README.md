@@ -223,3 +223,38 @@ public interface IGeometricShape : IHasArea, IHasPerimeter
 {
 }
 ```
+
+Tu código comienza a crecer, fantástico, así que piensas que es mejor seguir organizándolo y mueves toda la lógica del cálculo de sumas a otra clase:
+
+```
+public class GreatCalculator
+{
+    public double TotalAreas { get; private set; }
+    public double TotalPerimeters { get; private set; }
+
+    public void Calculate()
+    {
+        var figuras = new IGeometricShape[]
+        {
+            new Rectangle {Width = 10, Height = 5},
+            new EquilateralTriangle {SideLength = 5},
+            new Rectangle {Width = 4, Height = 6},
+//...
+```
+
+Y realizaste las modificaciones necesarias al método principal del programa:
+
+```
+private static void Main(string[] args)
+{
+    var calculator = new GreatCalculator();
+    calculator.Calculate();
+    Console.WriteLine($"Área total: {calculator.TotalAreas}\nPerímetro total:{calculator.TotalPerimeters}");
+    Console.ReadKey();
+}
+```
+
+Tu código está listo para ser expandido aún más. Todo parece perfecto, tu programa funciona de mil maravillas, pero está violando el principio de inversión de dependencia.  
+
+## Violación del ISP  
+Esta violación ocurre en la clase nueva que acabas de agregar, justo en el método `Calculate`, y es que este él mismo está creando las figuras con las que opera (en el arreglo `figuras`). ¿Qué va a pasar en el futuro cuando se quiera añadir otra figura? ¿o cuando se quiera cambiar el tamaño de algunas de las figuras ya existentes?
