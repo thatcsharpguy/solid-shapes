@@ -133,3 +133,51 @@ public double Sum(IEnumerable<IGeometricShape> shapes)
 ```
 
 De este modo para cuando en el futuro agreguémos nuevas figuras, únicamente tendremos que hacer que implementen ese comportamiento en común y no tendremos que modificar el código ya existente.  
+
+Ahora la gente comienza a pedir que tu programa pueda calcular la información de figuras cuadradas, entonces tu creas una clase llamada `Square` que herede de la clase `Rectangle` que creaste hace unos cuantos pasos, después de todo, un cuadrado no es más que un rectángulo con una pequeña restricción. Y para cumplir con dicha restricción, cambiaste el comportamiento de sus propiedades `Height` y `Width`:  
+
+```
+public class Square : Rectangle
+{
+    private double _height;
+    private double _width;
+
+    public override double Height
+    {
+        get { return _height; }
+        set
+        {
+            _height = value;
+            _width = value;
+        }
+    }
+
+    public override double Width
+    {
+        get { return _width; }
+        set
+        {
+            _width = value;
+            _height = value;
+        }
+    }
+}
+```
+
+Ahora, inclusive ya hay quien está desarrollando aplicaciones con tu código. Todo parece perfecto, tu programa funciona de mil maravillas, pero está violando el principio de sustitución de Liskov.  
+
+## Violación del LSP  
+Supón que como parte del crecimiento de tu programa, decidiste comenzar a escribir pruebas unitarias, y escribiste una como la siguiente:
+
+```
+Rectangle rectangle = new Square();
+rectangle.Width = 3;
+rectangle.Height = 6;
+
+double expected = 18;
+double actual = rectangle.Area();
+
+Assert.AreEqual(expected, actual);
+```  
+
+Hay algunas cosas raras... sin embargo el código compila y se ejecuta, sin embargo la prueba falla. Y es que de esto se trata el todo el principio de sustitución de Liskov: los subtipos de una clase deben comportarse siempre como esta. En otras palabras: deriva de una clase solo para agregarle capacidades, no para modificar las que ya cuenta.  

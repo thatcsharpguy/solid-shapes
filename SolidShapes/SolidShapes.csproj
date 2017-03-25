@@ -49,6 +49,7 @@
     <Compile Include="Shapes\EquilateralTriangle.cs" />
     <Compile Include="Shapes\IGeometricShape.cs" />
     <Compile Include="Shapes\Rectangle.cs" />
+    <Compile Include="Shapes\Square.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
