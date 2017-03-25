@@ -99,4 +99,37 @@ public class AreaOperations
 Todo parece perfecto nuévamente, tu programa funciona de mil maravillas, pero está violando el principio de abierto/cerrado.  
 
 ## Violación del OCP
-Probablemente ya tengas una idea de en qué parte del código se está violando este principio... pero si no: en las clases de operaciones, y es que tu programa está abierto a la extensión... pero no a la modificación. Ponte a pensar en qué va a pasar mañana que los círculos se pongan de moda. Tendrías que modificar el código de las operciones para que funcione con otra figura y así para cada figura que se le ocurra a los usuarios de tu programa.  
+Probablemente ya tengas una idea de en qué parte del código se está violando este principio... pero si no: en las clases de operaciones, y es que tu programa está abierto a la extensión... pero no a la modificación. Ponte a pensar en qué va a pasar mañana que los círculos se pongan de moda. Tendrías que modificar el código de las operciones para que funcione con otra figura y así para cada figura que se le ocurra a los usuarios de tu programa.   
+
+## Cumpliendo el OCP  
+La solución a esta violación se dará mediante el uso de abstracciones (en este caso la interfaz `IGeometricShape`) a través de la cual indicaremos que nuestras figuras comparten propiedades y métodos (en este caso el área y el perímetro):
+
+```
+public interface IGeometricShape
+{
+    double Area();
+    double Perimeter();
+}
+```
+
+Y también tenemos que modificar las clases de operaciones para que acepten ahora objetos que cumplan con ese comportamiento, para así poder llamar a esos métodos, sin tener que preocuparse de qué tipo son "realmente" los objetos con los que está trabajando:  
+
+```
+public double Sum(IEnumerable<IGeometricShape> shapes)
+{
+    double area = 0;
+    foreach (var shape in shapes)
+        area += shape.Area();
+    return area;
+}
+
+public double Sum(IEnumerable<IGeometricShape> shapes)
+{
+    double perimeter = 0;
+    foreach (var shape in shapes)
+        perimeter += shape.Perimeter();
+    return perimeter;
+}
+```
+
+De este modo para cuando en el futuro agreguémos nuevas figuras, únicamente tendremos que hacer que implementen ese comportamiento en común y no tendremos que modificar el código ya existente.  

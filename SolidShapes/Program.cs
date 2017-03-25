@@ -8,7 +8,7 @@ namespace SolidShapes
     {
         private static void Main(string[] args)
         {
-            var rectangulos = new object[]
+            var rectangulos = new IGeometricShape[]
             {
                 new Rectangle {Width = 10, Height = 5},
                 new EquilateralTriangle {SideLength = 5},
