@@ -47,6 +47,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shapes\EquilateralTriangle.cs" />
+    <Compile Include="Shapes\IHasPerimeter.cs" />
+    <Compile Include="Shapes\IHasArea.cs" />
     <Compile Include="Shapes\IGeometricShape.cs" />
     <Compile Include="Shapes\Rectangle.cs" />
     <Compile Include="Shapes\Square.cs" />

@@ -5,7 +5,7 @@ namespace SolidShapes.Operations
 {
     public class AreaOperations
     {
-        public double Sum(IEnumerable<IGeometricShape> shapes)
+        public double Sum(IEnumerable<IHasArea> shapes)
         {
             double area = 0;
             foreach (var shape in shapes)

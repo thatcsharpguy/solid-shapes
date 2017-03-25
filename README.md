@@ -205,3 +205,21 @@ public interface IGeometricShape
 ```  
 
 Y se usa tanto en el cálculo de suma de áreas y en el de perímetros. Pero, ¿por qué tendría que saber la clase encargada de sumar los perímetros, que los elementos con los que trabaja también poseen un área? 
+
+## Cumpliendo el ISP  
+El cumplir con este principio nos lleva a separar la interfaz `IGeometricShape` en dos: `IHasPerimeter` y `IHasArea`, para así pasarle únicamente la información necesaria a cada uno de los métodos dentro de nuestro programa:
+```
+public interface IHasArea
+{
+    double Area();
+}
+
+public interface IHasPerimeter
+{
+    double Perimeter();
+}
+
+public interface IGeometricShape : IHasArea, IHasPerimeter
+{
+}
+```

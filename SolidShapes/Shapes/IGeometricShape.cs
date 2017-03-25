@@ -1,8 +1,6 @@
 ﻿namespace SolidShapes.Shapes
 {
-    public interface IGeometricShape
+    public interface IGeometricShape : IHasArea, IHasPerimeter
     {
-        double Area();
-        double Perimeter();
     }
 }

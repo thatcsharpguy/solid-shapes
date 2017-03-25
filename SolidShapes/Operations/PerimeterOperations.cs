@@ -5,7 +5,7 @@ namespace SolidShapes.Operations
 {
     public class PerimeterOperations
     {
-        public double Sum(IEnumerable<IGeometricShape> shapes)
+        public double Sum(IEnumerable<IHasPerimeter> shapes)
         {
             double perimeter = 0;
             foreach (var shape in shapes)
