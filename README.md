@@ -258,3 +258,15 @@ Tu código está listo para ser expandido aún más. Todo parece perfecto, tu pr
 
 ## Violación del ISP  
 Esta violación ocurre en la clase nueva que acabas de agregar, justo en el método `Calculate`, y es que este él mismo está creando las figuras con las que opera (en el arreglo `figuras`). ¿Qué va a pasar en el futuro cuando se quiera añadir otra figura? ¿o cuando se quiera cambiar el tamaño de algunas de las figuras ya existentes?
+
+## Cumpliendo el DIP  
+Para cumplir con este principio tenemos que remover la dependencia que la clase `GreatCalculator` tiene con el arreglo `figuras`, haciendo que el objeto que la llame sea el encargado de proveerle con las figuras con las que tiene que operar:
+
+```
+public void Calculate(IEnumerable<IGeometricShape> figuras)
+{
+```
+
+De este modo se reduce su dependencia, y está preparado para operar con cualquier número de `IGeometricShape`s que deseemos.
+
+Y listo, hemos cumplido con los principíos SOLID.
