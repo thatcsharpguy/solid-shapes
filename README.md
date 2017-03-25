@@ -190,3 +190,18 @@ public class Square : IGeometricShape
 ```  
 
 De ese modo nadie, ni tu mismo, podrá pensar que en este ámbito los cuadrados y los rectángulos están relacionados.  
+
+Ahora sí, todo parece perfecto, tu programa funciona de mil maravillas, pero está violando el principio de segregación de la interfaz.  
+
+## Violación del ISP  
+Sin tener la menor intención nosotros introdujimos esta violación cuando cumplimos con el OCP, y es que el ISP nos indica que debemos separar las interfaces para que los componentes de software que trabajan con ellas tengan únicamente la información que de ellas necesitan y no más. Vamos a echarle un vistazo a la interfaz `IGeometricShape`:
+
+```
+public interface IGeometricShape
+{
+    double Area();
+    double Perimeter();
+}
+```  
+
+Y se usa tanto en el cálculo de suma de áreas y en el de perímetros. Pero, ¿por qué tendría que saber la clase encargada de sumar los perímetros, que los elementos con los que trabaja también poseen un área? 
