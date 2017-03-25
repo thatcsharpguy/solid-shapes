@@ -57,3 +57,46 @@ public class PerimeterOperations
         //
 ```  
 Entonces así cada clase tiene una sola responsabilidad: una representa un rectángulo y las otras se encargan de hacer operaciones relacionadas con ellos.  
+
+Ahora, supón que después de cierto tiempo, a la gente le gustó tanto tu programa que te piden que ahora tomes en cuenta también triángulos equiláteros y que tu programa permita sumar las áreas de triángulos con rectángulos.  
+
+Entonces creas una nueva clase para representar los triángulos, y modificas los métodos para sumar áreas  para que estos acepten tanto rectángulos como triángulos y dentro de ellos verificas de qué tipo es cada objeto y realizas el cálculo apropiado: 
+
+```
+public class PerimeterOperations
+{
+    public double Sum(IEnumerable<object> shapes)
+    {
+        double perimeter = 0;
+        foreach (var shape in shapes)
+        {
+            if (shape is Rectangle)
+                perimeter += 2 * ((Rectangle)shape).Height + 2 * ((Rectangle)shape).Width;
+            else if (shape is EquilateralTriangle)
+                perimeter += ((EquilateralTriangle) shape).SideLength * 3;
+        }
+        return perimeter;
+    }
+}
+
+public class AreaOperations
+{
+    public double Sum(IEnumerable<object> shapes)
+    {
+        double area = 0;
+        foreach (var shape in shapes)
+        {
+            if(shape is Rectangle)
+                area += ((Rectangle)shape).Height * ((Rectangle)shape).Width;
+            else if(shape is EquilateralTriangle)
+                area += Math.Sqrt(3) *  Math.Pow(((EquilateralTriangle)shape).SideLength,2) / 4;
+        }
+        return area;
+    }
+}
+```  
+
+Todo parece perfecto nuévamente, tu programa funciona de mil maravillas, pero está violando el principio de abierto/cerrado.  
+
+## Violación del OCP
+Probablemente ya tengas una idea de en qué parte del código se está violando este principio... pero si no: en las clases de operaciones, y es que tu programa está abierto a la extensión... pero no a la modificación. Ponte a pensar en qué va a pasar mañana que los círculos se pongan de moda. Tendrías que modificar el código de las operciones para que funcione con otra figura y así para cada figura que se le ocurra a los usuarios de tu programa.  

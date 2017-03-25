@@ -5,11 +5,14 @@ namespace SolidShapes.Operations
 {
     public class PerimeterOperations
     {
-        public double Sum(IEnumerable<Rectangle> rectangles)
+        public double Sum(IEnumerable<object> shapes)
         {
             double perimeter = 0;
-            foreach (var rectangle in rectangles)
-                perimeter += 2 * rectangle.Height + 2 * rectangle.Width;
+            foreach (var shape in shapes)
+                if (shape is Rectangle)
+                    perimeter += 2 * ((Rectangle) shape).Height + 2 * ((Rectangle) shape).Width;
+                else if (shape is EquilateralTriangle)
+                    perimeter += ((EquilateralTriangle) shape).SideLength * 3;
             return perimeter;
         }
     }

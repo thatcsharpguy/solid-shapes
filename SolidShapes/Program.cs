@@ -8,12 +8,13 @@ namespace SolidShapes
     {
         private static void Main(string[] args)
         {
-            var rectangulos = new[]
+            var rectangulos = new object[]
             {
                 new Rectangle {Width = 10, Height = 5},
+                new EquilateralTriangle {SideLength = 5},
                 new Rectangle {Width = 4, Height = 6},
-                new Rectangle {Width = 5, Height = 1},
-                new Rectangle {Width = 8, Height = 9}
+                new Rectangle {Width = 8, Height = 9},
+                new EquilateralTriangle {SideLength = 5}
             };
 
             var areaOperations = new AreaOperations();
