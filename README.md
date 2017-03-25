@@ -180,4 +180,13 @@ double actual = rectangle.Area();
 Assert.AreEqual(expected, actual);
 ```  
 
-Hay algunas cosas raras... sin embargo el código compila y se ejecuta, sin embargo la prueba falla. Y es que de esto se trata el todo el principio de sustitución de Liskov: los subtipos de una clase deben comportarse siempre como esta. En otras palabras: deriva de una clase solo para agregarle capacidades, no para modificar las que ya cuenta.  
+Hay algunas cosas raras... sin embargo el código compila y se ejecuta, sin embargo la prueba falla. Y es que de esto se trata el todo el principio de sustitución de Liskov: los subtipos de una clase deben comportarse siempre como esta. En otras palabras: deriva de una clase solo para agregarle capacidades, no para modificar las que ya cuenta.    
+
+## Cumpliendo el LSP  
+La solución es bastante simple: debemos hacer que `Square` no derive de `Rectangle`, y que en su lugar, implemente `IGeometrcShape`:
+
+```
+public class Square : IGeometricShape
+```  
+
+De ese modo nadie, ni tu mismo, podrá pensar que en este ámbito los cuadrados y los rectángulos están relacionados.  

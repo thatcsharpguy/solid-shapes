@@ -1,28 +1,18 @@
 ﻿namespace SolidShapes.Shapes
 {
-    public class Square : Rectangle
+    public class Square : IGeometricShape
     {
-        private double _height;
-        private double _width;
+        public double Sides { get; } = 4;
+        public double SideLength { get; set; }
 
-        public override double Height
+        public double Area()
         {
-            get { return _height; }
-            set
-            {
-                _height = value;
-                _width = value;
-            }
+            return SideLength * SideLength;
         }
 
-        public override double Width
+        public double Perimeter()
         {
-            get { return _width; }
-            set
-            {
-                _width = value;
-                _height = value;
-            }
+            return SideLength * 4;
         }
     }
 }
