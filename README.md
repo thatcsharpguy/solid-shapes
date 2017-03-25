@@ -38,3 +38,22 @@ Todo parece perfecto, tu programa funciona de mil maravillas, pero está violand
 
 ## Violación del SRP  
 La violación ocurre al momento de declarar los métodos `SumAreas` y `SumPerimeters` dentro de la misma clase que `Rectangle` y es que a pesar de que están relacionadas con el rectángulo como tal, la sumatoria forma parte de nuestra lógica de la aplicación, no de la lógica que podría tener un rectángulo en la vida real.  
+
+## Cumpliendo el SRP  
+Para cumplir con el principio, quitamos la funcionalidad de sumatorias de la clase `Rectangle` e introducimos un par de clases encargadas de realizar las operaciones sobre el los conjuntos de rectángulos, su código es más o menos este:  
+
+```
+public class AreaOperations
+{
+    public static double Sum(IEnumerable<Rectangle> rectangles)
+    {
+        //
+        
+
+public class PerimeterOperations
+{
+    public static double Sum(IEnumerable<Rectangle> rectangles)
+    {
+        //
+```  
+Entonces así cada clase tiene una sola responsabilidad: una representa un rectángulo y las otras se encargan de hacer operaciones relacionadas con ellos.  

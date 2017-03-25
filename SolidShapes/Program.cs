@@ -1,4 +1,5 @@
 ﻿using System;
+using SolidShapes.Operations;
 using SolidShapes.Shapes;
 
 namespace SolidShapes
@@ -15,8 +16,11 @@ namespace SolidShapes
                 new Rectangle {Width = 8, Height = 9}
             };
 
-            var sumaDeAreas = Rectangle.SumAreas(rectangulos);
-            var sumaDePerimetros = Rectangle.SumPerimeters(rectangulos);
+            var areaOperations = new AreaOperations();
+            var perimeterOperations = new PerimeterOperations();
+
+            var sumaDeAreas = areaOperations.Sum(rectangulos);
+            var sumaDePerimetros = perimeterOperations.Sum(rectangulos);
 
             Console.WriteLine($"Área total: {sumaDeAreas}\nPerímetro total:{sumaDePerimetros}");
             Console.ReadKey();
